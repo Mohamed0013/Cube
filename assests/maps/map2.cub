@@ -1,0 +1,21 @@
+SO      ./assests/textures/2.xpm
+NO      ./assests/textures/4.xpm
+                       
+EA ./assests/textures/3.xpm
+
+WE ./assests/textures/1.xpm
+
+
+
+F 255,255,255
+
+C 255,255,255
+
+
+11111111111
+10000000001
+10000000001
+10100000101
+10000N00001
+10000000001
+11111111111
