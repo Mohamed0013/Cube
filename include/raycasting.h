@@ -5,6 +5,7 @@
 # include <X11/X.h>
 # include <X11/Xlib.h>
 # include <X11/keysym.h>
+# include <X11/extensions/XKB.h>
 # include <math.h>
 # include <mlx.h>
 # include <stdio.h>
@@ -38,16 +39,6 @@
 # define WIDTH 1200
 
 # ifdef INPUT_MAC
-#  define LEFT_KEY 123
-#  define RIGHT_KEY 124
-#  define UP_KEY 126
-#  define DOWN_KEY 125
-#  define ESC_KEY 53
-#  define W_KEY 13
-#  define A_KEY 0
-// #define W_KEY 119
-#  define S_KEY 1
-#  define D_KEY 2
 # else
 #  define LEFT_KEY 65361
 #  define RIGHT_KEY 65363
@@ -59,7 +50,13 @@
 #  define S_KEY 115
 #  define D_KEY 100
 # endif
-
+#ifdef INPUT_MAC
+    // ...existing key definitions...
+    #define M_KEY 46
+#else
+    // ...existing key definitions...
+    #define M_KEY 109
+#endif
 # define TEXTURE_WIDTH 64
 
 typedef struct s_mlx		t_mlx;
@@ -173,6 +170,8 @@ typedef struct s_player
 	t_vec2		dir;
 	t_vec2		plane;
 	t_ray		ray;
+	int     last_mouse_x;
+    int     mouse_active;
 }				t_player;
 
 typedef struct s_mlx
@@ -229,6 +228,8 @@ void			listen_events(t_game *game);
 int				key_press(int key, t_game *game);
 void			init_mlx_struct(t_game *game);
 void			start_mlx(void);
+int             handle_mouse(int x, int y, t_game *game);
+void            toggle_mouse(t_game *game);
 void			mlx_delete_image(void *mlx_ptr, void *img_ptr);
 void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, unsigned int color);
 void			tmp_raycaster(t_game *game);
@@ -252,4 +253,8 @@ t_vec2			calculate_plane(t_vec2 dir);
 
 void			free_2d_array(void ***array, int size);
 void			render_frame(t_game *game);
+
+void toggle_mouse(t_game *game);
+int handle_mouse(int x, int y, t_game *game);
+
 #endif

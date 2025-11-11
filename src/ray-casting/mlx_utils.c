@@ -6,11 +6,12 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:51:15 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/08 12:51:16 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 12:26:06 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
+#include <time.h>
 
 void	setup_scene(t_game *game)
 {
@@ -29,13 +30,15 @@ void	init_mlx_struct(t_game *game)
 	game->mlx->mlx = mlx_init();
 	if (!game->mlx->mlx)
 		exit(close_window(game));
-	game->mlx->win = mlx_new_window(game->mlx->mlx, WIDTH, HEIGHT, "Cub3D_42");
+	game->mlx->win = mlx_new_window(game->mlx->mlx, WIDTH, HEIGHT, "Cub3D");
 	if (!game->mlx->win)
 		exit(close_window(game));
 	game->mlx->width = WIDTH;
 	game->mlx->height = HEIGHT;
 	ft_bzero(game->player, sizeof(t_player));
 	ft_bzero(game->texture, sizeof(t_texture));
+	game->player->mouse_active = 0;
+	game->player->last_mouse_x = WIDTH/2;
 }
 
 int	render_game(t_game *game)
@@ -50,13 +53,35 @@ int	render_game(t_game *game)
 
 int	render(t_game *game)
 {
-	game->frame = 1.0 / 60.0;
+	static struct timespec last = {0, 0};
+	struct timespec now;
+	double delta;
+
+	if (clock_gettime(CLOCK_MONOTONIC, &now) == -1)
+		delta = 1.0 / 60.0;
+	else if (last.tv_sec == 0 && last.tv_nsec == 0)
+	{
+		last = now;
+		delta = 1.0 / 60.0;
+	}
+	else
+	{
+		delta = (now.tv_sec - last.tv_sec) + (now.tv_nsec - last.tv_nsec) / 1e9;
+		if (delta <= 0 || delta > 1.0)
+			delta = 1.0 / 60.0;
+		last = now;
+	}
+
+	game->frame = delta;
 	game->player->move_speed = game->frame * SPEED;
 	game->player->rot_speed = game->frame * ROT_SPEED;
-	game->player->is_moving = move_player(game);
-	if (game->player->is_moving == 0)
-		return (0);
-	render_game(game);
+
+	// Process movement and rotation; render when either happens
+	int moved = move_player(game);
+	int rotated = game->player->is_moving;
+	if (moved || rotated)
+		render_game(game);
+	game->player->is_moving = 0;  // Reset rotation flag only
 	return (0);
 }
 
