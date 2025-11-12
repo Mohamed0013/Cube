@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/12 12:45:10 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/12 12:47:58 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/12 17:17:16 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,17 @@ static int	key_release(int key, t_game *game)
 		player->rotate = 0;
 	if (key == RIGHT_KEY && player->rotate == -1)
 		player->rotate = 0;
+	if (key == 65505)
+	{
+		game->player->is_sprinting = 0;
+        return (0);
+	}
 	game->player = player;
 	return (0);
 }
 
-int	key_press(int key, t_game *game)
+void	mondatory(t_game *game, int key, t_player *player)
 {
-	t_player	*player;
-
-	player = game->player;
 	if (key == ESC_KEY)
 		close_window(game);
 	if (key == W_KEY)
@@ -54,10 +56,23 @@ int	key_press(int key, t_game *game)
 		player->rotate = 1;
 	if (key == RIGHT_KEY)
 		player->rotate = -1;
+}
+
+int	key_press(int key, t_game *game)
+{
+	t_player	*player;
+
+	player = game->player;
+	mondatory(game, key, player);
 	if (key == 'm' || key == 'M')
 	{
 		toggle_mouse(game);
 		player->is_moving = 1;
+	}
+	if (key == 65505)
+	{
+		game->player->is_sprinting = 1;
+		return (0);
 	}
 	game->player = player;
 	return (0);

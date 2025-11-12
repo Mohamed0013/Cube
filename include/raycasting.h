@@ -10,7 +10,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
-#include <time.h>
+#include <sys/time.h>
 
 # define MLX_ERROR "Error\nmlx failed to initialize\n"
 
@@ -171,8 +171,9 @@ typedef struct s_player
 	t_vec2		dir;
 	t_vec2		plane;
 	t_ray		ray;
-	int     last_mouse_x;
-    int     mouse_active;
+	int			last_mouse_x;
+    int			mouse_active;
+	int			is_sprinting;
 }				t_player;
 
 typedef struct s_mlx
