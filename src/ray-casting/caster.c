@@ -6,13 +6,13 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:50:48 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/08 12:50:49 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:48:36 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shared.h"
 
-t_vec2	determine_first_xy_side(t_vec2 pos, int map_x, int map_y, t_ray *ray)
+t_vec2	determine_first_side(t_vec2 pos, int map_x, int map_y, t_ray *ray)
 {
 	t_vec2			first_side;
 	const double	tile_posx = pos.x;

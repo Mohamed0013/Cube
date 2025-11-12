@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:52:53 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/08 12:52:54 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:46:28 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ double	vec2_to_angle(t_vec2 vec2)
 	return (res);
 }
 
-t_vec2	vec2_add_vec2(t_vec2 a, t_vec2 b)
+t_vec2	add_vec2(t_vec2 a, t_vec2 b)
 {
 	t_vec2	res;
 

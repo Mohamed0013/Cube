@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:52:50 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/08 12:52:51 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:19:45 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	vec2_normalized(t_vec2 *vec)
 	}
 }
 
-void	vec2_rotate_vec2(t_vec2 *vec, double angle)
+void	vec2_rotate(t_vec2 *vec, double angle)
 {
 	double	x;
 	double	y;

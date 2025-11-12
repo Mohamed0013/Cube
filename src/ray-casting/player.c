@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:51:22 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/10 12:38:23 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 13:43:02 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	set_player_angle(t_game *game)
 	game->player->plane = calculate_plane(game->player->dir);
 }
 
-void	get_player_pos_and_dst(t_game *game)
+void	get_player_pos_and_ang(t_game *game)
 {
 	int	i;
 	int	j;

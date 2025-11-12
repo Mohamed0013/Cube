@@ -99,5 +99,5 @@ int	main(int ac, char **av)
 	data()->longest = get_longest_line();
 	data()->map_width = data()->longest;
 	fix_map();
-	start_mlx();
+	mlx();
 }

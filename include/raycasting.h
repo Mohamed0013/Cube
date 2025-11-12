@@ -10,6 +10,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <stdlib.h>
+#include <time.h>
 
 # define MLX_ERROR "Error\nmlx failed to initialize\n"
 
@@ -200,25 +201,21 @@ typedef struct s_game
 int				ftx(t_texture *txxr);
 void			setup_textures(t_game *game, t_texture *textrs,
 					t_mlx *mlx);
-void			init_texture(t_texture *texture);
 void			init_img_clean(t_img *img);
 void			get_txt_index(t_texture *texture, t_ray ray, int *index);
 void			update_texture(t_game *game, t_ray *ray, size_t x);
 int				*xpm_to_buffer(t_game *buffer, t_texture *txtr,
 					t_mlx *mlx, char *path);
-void			init_screen_pixels(t_texture *texture);
 void			set_pixel_image(t_img *img, int x, int y,
 					int color);
 void			calculate_line_wall_x(t_game *game, t_ray *ray);
 int				move_player(t_game *game);
-void			init_game(t_game *game);
 int				render(t_game *game);
 int				render_game(t_game *game);
 
 t_parse			*data(void);
 void			set_player_angle(t_game *game);
-void			get_player_pos_and_dst(t_game *game);
-void			put_player(t_game *game);
+void			get_player_pos_and_ang(t_game *game);
 double			degree_to_radian(double degree);
 double			radian_to_degree(double radian);
 void			handle_movement(t_player *player, t_vec2 *new_pos, int *moved);
@@ -227,14 +224,11 @@ int				close_window(t_game *game);
 void			listen_events(t_game *game);
 int				key_press(int key, t_game *game);
 void			init_mlx_struct(t_game *game);
-void			start_mlx(void);
-int             handle_mouse(int x, int y, t_game *game);
-void            toggle_mouse(t_game *game);
-void			mlx_delete_image(void *mlx_ptr, void *img_ptr);
-void			my_mlx_pixel_put(t_mlx *mlx, int x, int y, unsigned int color);
-void			tmp_raycaster(t_game *game);
+void			mlx(void);
+int				handle_mouse(int x, int y, t_game *game);
+void			toggle_mouse(t_game *game);
+void			raycaster(t_game *game);
 t_rgb			itorgb(int *color);
-int				display(t_game *game);
 void			draw_floor(t_game *game, int x, int *y, unsigned int floor);
 void			draw_ceil(t_game *game, int x, int y, unsigned int ceil);
 t_rgb			clr_to_rgb(unsigned int color);
@@ -242,19 +236,14 @@ t_rgb			apply_shading(t_rgb rgb, double wall_dist);
 unsigned int	rgb_to_uint(t_rgb rgb);
 void			draw_floor_ceil(t_game *game);
 
-void			draw_map(t_game *game);
-void			draw_square(t_game *game, int x, int y);
-void			draw_personal_line(t_game *game);
+void			setup_scene(t_game *game);
 void			set_pixel_image(t_img *img, int x, int y, int color);
 
-t_vec2			determine_first_xy_side(t_vec2 pos, int map_x, int map_y,
+t_vec2			determine_first_side(t_vec2 pos, int map_x, int map_y,
 					t_ray *ray);
 t_vec2			calculate_plane(t_vec2 dir);
 
 void			free_2d_array(void ***array, int size);
 void			render_frame(t_game *game);
-
-void toggle_mouse(t_game *game);
-int handle_mouse(int x, int y, t_game *game);
 
 #endif

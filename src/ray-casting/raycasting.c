@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/08 12:51:33 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/10 12:43:57 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/11 17:33:35 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_wall_dist(t_game *game, t_ray *ray, double t[3])
 	}
 }
 
-void	set_ray_dir(t_ray *ray)
+void	set_delta(t_ray *ray)
 {
 	if (ray->dir.x == 0)
 		ray->delta_dist.x = INFINITY;
@@ -58,7 +58,7 @@ void	set_ray_dir(t_ray *ray)
 		ray->delta_dist.y = fabs(1.0 / ray->dir.y);
 }
 
-void	tmp_raycaster(t_game *game)
+void	raycaster(t_game *game)
 {
 	t_ray		ray;
 	t_player	*plyr;
@@ -72,10 +72,10 @@ void	tmp_raycaster(t_game *game)
 		map_y = (int)(game->player->pos.y);
 		camera_x = 2.0 * ((double)i / (double)(number_of_rays - 1))
 			- 1.0;
-		ray.dir = vec2_add_vec2(plyr->dir, vec2_scale(plyr->plane, camera_x));
+		ray.dir = add_vec2(plyr->dir, vec2_scale(plyr->plane, camera_x));
 		vec2_normalized(&ray.dir);
-		set_ray_dir(&ray);
-		ray.side_dist = determine_first_xy_side(plyr->pos, map_x, map_y, &ray);
+		set_delta(&ray);
+		ray.side_dist = determine_first_side(plyr->pos, map_x, map_y, &ray);
 		get_wall_dist(game, &ray, (double [3]){map_x, map_y, camera_x});
 		calculate_line_wall_x(game, &ray);
 		update_texture(game, &ray, i);
