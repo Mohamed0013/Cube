@@ -6,7 +6,7 @@
 /*   By: mohdahma <mohdahma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/11 15:08:34 by mohdahma          #+#    #+#             */
-/*   Updated: 2025/11/12 17:13:09 by mohdahma         ###   ########.fr       */
+/*   Updated: 2025/11/13 09:54:11 by mohdahma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,43 +22,24 @@ int	render_game(t_game *game)
 	return (0);
 }
 
-void    second_part(t_game *game, double delta)
+void	second_part(t_game *game, double delta)
 {
-    int     moved;
-    int     rotated;
-    // double  move_speed;  <-- We don't need this local variable
-    double  sprint_multiplier;
+	int		moved;
+	int		rotated;
+	double	sprint_multiplier;
 
-    game->frame = delta; // This is fine, 'delta' is your frame time
-    sprint_multiplier = 2.0;
-
-    // Set the rotation speed (this is always the same)
-    game->player->rot_speed = game->frame * ROT_SPEED;
-
-    // --- This is the corrected part ---
-    // Now, calculate the correct move_speed and store it
-    // directly in the player struct.
-    if (game->player->is_sprinting)
-    {
-        // Player is sprinting!
-        game->player->move_speed = delta * (SPEED * sprint_multiplier);
-    }
-    else
-    {
-        // Player is walking normally
-        game->player->move_speed = delta * SPEED;
-    }
-    // We removed the old line: game->player->move_speed = game->frame * SPEED;
-
-    // Now, move_player() will look at game->player->move_speed
-    // and automatically use the correct speed (normal or sprint).
-    moved = move_player(game);
-
-    rotated = game->player->is_moving;
-    if (moved || rotated)
-        render_game(game);
-
-    game->player->is_moving = 0;
+	game->frame = delta;
+	sprint_multiplier = 2.0;
+	game->player->rot_speed = game->frame * ROT_SPEED;
+	if (game->player->is_sprinting)
+		game->player->move_speed = delta * (SPEED * sprint_multiplier);
+	else
+		game->player->move_speed = delta * SPEED;
+	moved = move_player(game);
+	rotated = game->player->is_moving;
+	if (moved || rotated)
+		render_game(game);
+	game->player->is_moving = 0;
 }
 
 int render(t_game *game)

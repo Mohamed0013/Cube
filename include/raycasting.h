@@ -51,13 +51,7 @@
 #  define S_KEY 115
 #  define D_KEY 100
 # endif
-#ifdef INPUT_MAC
-    // ...existing key definitions...
-    #define M_KEY 46
-#else
-    // ...existing key definitions...
-    #define M_KEY 109
-#endif
+#define M_KEY 109
 # define TEXTURE_WIDTH 64
 
 typedef struct s_mlx		t_mlx;
