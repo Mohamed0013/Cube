@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "chrono": "c",
-        "shared.h": "c",
-        "parser.h": "c",
-        "raycasting.h": "c"
-    }
-}
