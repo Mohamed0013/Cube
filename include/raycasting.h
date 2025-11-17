@@ -50,6 +50,7 @@
 #  define A_KEY 97
 #  define S_KEY 115
 #  define D_KEY 100
+# endif
 #define M_KEY 109
 # define TEXTURE_WIDTH 64
 
