@@ -50,7 +50,6 @@
 #  define A_KEY 97
 #  define S_KEY 115
 #  define D_KEY 100
-# endif
 #define M_KEY 109
 # define TEXTURE_WIDTH 64
 
@@ -218,6 +217,8 @@ void			handle_rotation(t_player *player, int *moved);
 int				close_window(t_game *game);
 void			listen_events(t_game *game);
 int				key_press(int key, t_game *game);
+void			interact(t_game *game);
+int				is_blocking_tile(char c);
 void			init_mlx_struct(t_game *game);
 void			mlx(void);
 int				handle_mouse(int x, int y, t_game *game);
